@@ -23,7 +23,7 @@ export class QuotesComponent {
     this.mode = "reactive";
     this.pagination = true;
     this.page = 0;
-    this.size = 50;
+    this.size = 10;
   }
 
   resetData() {
