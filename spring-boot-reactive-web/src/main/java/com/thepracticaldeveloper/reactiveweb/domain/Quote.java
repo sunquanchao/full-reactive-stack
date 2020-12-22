@@ -56,4 +56,16 @@ public final class Quote {
         result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setBook(String book) {
+        this.book = book;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

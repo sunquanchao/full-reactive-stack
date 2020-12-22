@@ -14,8 +14,8 @@ public interface QuoteMongoReactiveRepository extends ReactiveSortingRepository<
 
     Flux<Quote> findByContent(final String content);
 
-    //s@Query()
-//    Flux<Quote> findByContentFuzzy(final String content);
+    @Query("{ 'content': ?0}")
+    Flux<Quote> findByContentFuzzy(final String content);
 
     @Query("{ 'book': ?0, 'content': ?1}")
     Flux<Quote> findByContentAndBook(final String book,final String content);

@@ -4,9 +4,11 @@ import com.thepracticaldeveloper.reactiveweb.domain.Quote;
 import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoReactiveRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
@@ -54,6 +56,15 @@ public class QuoteReactiveController {
 			final @RequestParam(name = "content") String content) {
 		return quoteMongoReactiveRepository.findByContentAndBook(book,content)
 				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
+	}
+
+	@PostMapping("/quotes-reactive-add")
+	public Mono<Quote> addQuoteFlux(final @RequestParam(name = "book") String book,
+									final @RequestParam(name = "content") String content) {
+		Quote quote = new Quote();
+		quote.setBook(book);
+		quote.setContent(content);
+		return quoteMongoReactiveRepository.save(quote);
 	}
 
 }
