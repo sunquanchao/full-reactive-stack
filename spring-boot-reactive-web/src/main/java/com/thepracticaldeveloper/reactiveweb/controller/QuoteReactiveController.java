@@ -13,7 +13,7 @@ import java.time.Duration;
 @RestController
 public class QuoteReactiveController {
 
-    private static final int DELAY_PER_ITEM_MS = 100;
+    private static final int DELAY_PER_ITEM_MS = 100*10;
 
     private final QuoteMongoReactiveRepository quoteMongoReactiveRepository;
 
