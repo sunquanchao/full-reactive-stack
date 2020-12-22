@@ -93,4 +93,27 @@ public class QuoteReactiveControllerIntegrationTest {
 
     }
 
+
+    @Test
+    public void findByContentOrderByIdAsc() {
+        // when
+        Flux<Quote> receivedFlux = webClient.get().uri("/quotes-reactive-paged-by-content?content=gofun-dev&page=1&size=2")
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchange().flatMapMany(response -> response.bodyToFlux(Quote.class));
+
+
+        receivedFlux.subscribe(e-> {
+            System.out.print(e.getBook());
+        });
+//        while(receivedFlux.()){
+//
+//        }
+        System.out.print("end");
+
+
+    }
+
+
+
+
 }

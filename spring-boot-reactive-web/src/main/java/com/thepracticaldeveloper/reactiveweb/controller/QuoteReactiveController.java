@@ -33,4 +33,19 @@ public class QuoteReactiveController {
                 .delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
     }
 
+
+	@GetMapping("/quotes-reactive-paged-by-content")
+	public Flux<Quote> getQuoteFlux(final @RequestParam(name = "content") String content,
+									final @RequestParam(name = "page") int page,
+									final @RequestParam(name = "size") int size) {
+		return quoteMongoReactiveRepository.findByContentOrderByIdAsc(content,PageRequest.of(page, size))
+				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
+	}
+
+	@GetMapping("/quotes-reactive-by-content")
+	public Flux<Quote> getQuoteFlux(final @RequestParam(name = "content") String content) {
+		return quoteMongoReactiveRepository.findByContent(content)
+				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
+	}
+
 }
