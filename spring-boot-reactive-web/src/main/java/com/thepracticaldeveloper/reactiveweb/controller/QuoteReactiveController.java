@@ -48,4 +48,12 @@ public class QuoteReactiveController {
 				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
 	}
 
+	@GetMapping("/quotes-reactive-by-book-content")
+	public Flux<Quote> getQuoteFlux(
+			final @RequestParam(name = "book") String book,
+			final @RequestParam(name = "content") String content) {
+		return quoteMongoReactiveRepository.findByContentAndBook(book,content)
+				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
+	}
+
 }
