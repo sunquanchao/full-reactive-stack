@@ -102,9 +102,9 @@ public class QuoteReactiveControllerIntegrationTest {
                 .exchange().flatMapMany(response -> response.bodyToFlux(Quote.class));
 
 
-        receivedFlux.subscribe(e-> {
-            System.out.print(e.getBook());
-        });
+//        receivedFlux.osubscribe(e-> {
+//            System.out.print(e.getBook());
+//        });
 
         System.out.print("end");
 
