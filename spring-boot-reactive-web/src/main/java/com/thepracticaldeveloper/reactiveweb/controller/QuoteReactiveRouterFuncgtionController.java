@@ -4,6 +4,7 @@ import com.thepracticaldeveloper.reactiveweb.domain.Quote;
 import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoReactiveRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.DispatcherHandler;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -23,6 +24,8 @@ public class QuoteReactiveRouterFuncgtionController {
 
     @GetMapping("/quotes-reactive")
     public Flux<Quote> getQuoteFlux() {
+
+		// DispatcherServlet /DispatcherHandler
         return quoteMongoReactiveRepository.findAll().delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
     }
 

@@ -3,15 +3,17 @@ package com.thepracticaldeveloper.reactiveweb.controller;
 import com.thepracticaldeveloper.reactiveweb.domain.Quote;
 import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoReactiveRepository;
 import org.springframework.data.domain.PageRequest;
+//import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.util.concurrent.Flow;
+//import java.util.concurrent.Flow;
 
 @RestController
 public class QuoteReactiveController {
@@ -30,7 +32,9 @@ public class QuoteReactiveController {
     }
 
     @GetMapping("/quotes-reactive-paged")
-    public Flux<Quote> getQuoteFlux(final @RequestParam(name = "page") int page,
+    public Flux<Quote> getQuoteFlux(
+			ServerRequest request,
+    		final @RequestParam(name = "page") int page,
                                     final @RequestParam(name = "size") int size) {
         return quoteMongoReactiveRepository.findAllByIdNotNullOrderByIdAsc(PageRequest.of(page, size))
                 .delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
