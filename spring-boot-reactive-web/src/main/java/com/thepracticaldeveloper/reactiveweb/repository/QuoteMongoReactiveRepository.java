@@ -12,6 +12,7 @@ public interface QuoteMongoReactiveRepository extends ReactiveSortingRepository<
 
     Flux<Quote> findByContentOrderByIdAsc(final String content,final Pageable page);
 
+	//@Query("{ 'content': ?0}")
     Flux<Quote> findByContent(final String content);
 
     @Query("{ 'content': ?0}")
